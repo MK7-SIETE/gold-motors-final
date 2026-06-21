@@ -194,4 +194,4 @@ createNotice:     (data)     => superRequest('POST',   '/super/notices', data),
 toggleNotice:     (id)       => superRequest('PATCH',  `/super/notices/${id}/toggle`),
 deleteNotice:     (id)       => superRequest('DELETE', `/super/notices/${id}`),
 
-};
+}; 
