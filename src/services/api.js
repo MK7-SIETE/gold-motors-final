@@ -1,3 +1,4 @@
+// API service - production build
 const BASE_URL = import.meta.env.VITE_API_URL || 'https://gold-motors-api.onrender.com/api';
 function getDealerToken() {
   try { return JSON.parse(sessionStorage.getItem('gm-dealer') || 'null')?.token || null; }
