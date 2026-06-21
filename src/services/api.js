@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://gold-motors-api.onrender.com';
 
 function getDealerToken() {
   try { return JSON.parse(sessionStorage.getItem('gm-dealer') || 'null')?.token || null; }
