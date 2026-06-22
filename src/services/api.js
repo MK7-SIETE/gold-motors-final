@@ -1,5 +1,6 @@
 // API service - production build
-const BASE_URL = import.meta.env.VITE_API_URL || 'https://gold-motors-api.onrender.com/api';
+const BASE_URL = 'https://gold-motors-api.onrender.com/api';
+
 function getDealerToken() {
   try { return JSON.parse(sessionStorage.getItem('gm-dealer') || 'null')?.token || null; }
   catch { return null; }
@@ -123,13 +124,9 @@ export const api = {
   markRead:      (id)  => request('PATCH',  `/dealer/messages/${id}/read`),
   deleteMessage: (id)  => request('DELETE', `/dealer/messages/${id}`),
 
-  // ___ Notices
-
-getDealerNotices:  ()   => request('GET',   '/dealer/notices'),
-markNoticeRead:    (id) => request('PATCH', `/dealer/notices/${id}/read`),
-
-
-  
+  // ── Dealer: notices ───────────────────────────────────────────
+  getDealerNotices:  ()   => request('GET',   '/dealer/notices'),
+  markNoticeRead:    (id) => request('PATCH', `/dealer/notices/${id}/read`),
 
   // ── Dealer: stats & profile ───────────────────────────────────
   getDealerStats: () => request('GET', '/dealer/stats'),
@@ -151,15 +148,12 @@ markNoticeRead:    (id) => request('PATCH', `/dealer/notices/${id}/read`),
   // ── Super: data ───────────────────────────────────────────────
   getSuperCars:     () => superRequest('GET', '/super/cars'),
   getSuperMessages: () => superRequest('GET', '/super/messages'),
-  superMarkRead: (id) => superRequest('PATCH', `/super/messages/${id}/read`),
+  superMarkRead:    (id) => superRequest('PATCH', `/super/messages/${id}/read`),
 
-  
-  // ── Super: Testimonial ───────────────────────────────────
-
+  // ── Super: testimonials ───────────────────────────────────────
   getSuperTestimonials:    ()           => superRequest('GET',    '/super/testimonials'),
-updateTestimonialStatus: (id, status) => superRequest('PATCH',  `/super/testimonials/${id}/status`, { status }),
-deleteTestimonial:       (id)         => superRequest('DELETE', `/super/testimonials/${id}`),
-  
+  updateTestimonialStatus: (id, status) => superRequest('PATCH',  `/super/testimonials/${id}/status`, { status }),
+  deleteTestimonial:       (id)         => superRequest('DELETE', `/super/testimonials/${id}`),
 
   // ── Super: profile & config ───────────────────────────────────
   getSuperProfile:    ()     => superRequest('GET', '/super/profile'),
@@ -188,11 +182,9 @@ deleteTestimonial:       (id)         => superRequest('DELETE', `/super/testimon
   deleteNewsletter: (id)       => superRequest('DELETE', `/super/newsletters/${id}`),
   sendNewsletter:   (id)       => superRequest('POST',   `/super/newsletters/${id}/send`, {}),
 
-  // Notices
-
-getSuperNotices:  ()         => superRequest('GET',    '/super/notices'),
-createNotice:     (data)     => superRequest('POST',   '/super/notices', data),
-toggleNotice:     (id)       => superRequest('PATCH',  `/super/notices/${id}/toggle`),
-deleteNotice:     (id)       => superRequest('DELETE', `/super/notices/${id}`),
-
-}; 
+  // ── Super: notices ────────────────────────────────────────────
+  getSuperNotices:  ()         => superRequest('GET',    '/super/notices'),
+  createNotice:     (data)     => superRequest('POST',   '/super/notices', data),
+  toggleNotice:     (id)       => superRequest('PATCH',  `/super/notices/${id}/toggle`),
+  deleteNotice:     (id)       => superRequest('DELETE', `/super/notices/${id}`),
+};
