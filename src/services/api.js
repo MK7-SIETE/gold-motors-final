@@ -11,6 +11,18 @@ function getSuperToken() {
   catch { return null; }
 }
 
+// Force all http:// URLs to https:// recursively in any response object
+function httpsify(obj) {
+  if (typeof obj === 'string') {
+    return obj.startsWith('http://') ? obj.replace('http://', 'https://') : obj;
+  }
+  if (Array.isArray(obj)) return obj.map(httpsify);
+  if (obj !== null && typeof obj === 'object') {
+    return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, httpsify(v)]));
+  }
+  return obj;
+}
+
 // General request — dealer token takes priority, falls back to super
 async function request(method, path, data = null, isFormData = false) {
   const headers = { Accept: 'application/json' };
@@ -22,7 +34,7 @@ async function request(method, path, data = null, isFormData = false) {
   const res  = await fetch(`${BASE_URL}${path}`, options);
   const json = await res.json().catch(() => ({ message: 'Server error' }));
   if (!res.ok) throw json;
-  return json;
+  return httpsify(json);
 }
 
 // Super JSON request — always uses super token, always JSON
@@ -35,7 +47,7 @@ async function superRequest(method, path, data = null) {
   const res  = await fetch(`${BASE_URL}${path}`, options);
   const json = await res.json().catch(() => ({ message: 'Server error' }));
   if (!res.ok) throw json;
-  return json;
+  return httpsify(json);
 }
 
 // Super FormData request — always uses super token, no Content-Type (browser sets multipart boundary)
@@ -48,7 +60,7 @@ async function superFormRequest(method, path, data = null) {
   const res  = await fetch(`${BASE_URL}${path}`, options);
   const json = await res.json().catch(() => ({ message: 'Server error' }));
   if (!res.ok) throw json;
-  return json;
+  return httpsify(json);
 }
 
 export const api = {
