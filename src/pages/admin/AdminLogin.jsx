@@ -28,7 +28,7 @@ export default function AdminLogin() {
   return (
     <div className="admin-login-page">
       <div className="admin-login-card">
-        <img src={logo} alt="Gold Motors" />
+        <img src={logo} alt="Mukuba Motors" />
         <h1>Dealer Portal</h1>
         <p className="subtitle">Sign in to manage your listings</p>
         {error && <div className="admin-login-error">{error}</div>}
@@ -37,7 +37,7 @@ export default function AdminLogin() {
             <label>Email address</label>
             <input type="email" value={email} required autoFocus
               onChange={e => setEmail(e.target.value)}
-              placeholder="you@goldmotors.zm" />
+              placeholder="you@mukubamotors.zm" />
           </div>
           <div className="form-group">
             <label>Password</label>
@@ -52,7 +52,7 @@ export default function AdminLogin() {
           </button>
         </form>
         <p style={{ fontSize:'11px', color:'rgba(255,255,255,0.2)', textAlign:'center', marginTop:'20px' }}>
-          Gold Motors General Dealers Ltd · Staff access only
+          Mukuba Motors Ltd · Staff access only
         </p>
       </div>
     </div>

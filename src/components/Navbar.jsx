@@ -168,7 +168,7 @@ export default function Navbar() {
     } catch {}
     return 'Mon – Sat: 08:00 – 17:00';
   })();
-  const companyName = cfg.dealership_name || 'Gold Motors General Dealers Ltd';
+  const companyName = cfg.dealership_name || 'Mukuba Motors Ltd';
 
   useEffect(() => { setMobileOpen(false); setActiveDropdown(null); }, [location]);
 
@@ -220,10 +220,10 @@ export default function Navbar() {
       {/* Main navbar */}
       <header ref={navRef} className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
         <div className="container navbar__inner">
-          <Link to="/" className="navbar__logo" aria-label="Gold Motors home">
+          <Link to="/" className="navbar__logo" aria-label="Mukuba Motors home">
             <img
               src={logo}
-              alt="Gold Motors General Dealers Limited"
+              alt="Mukuba Motors Limited"
               className="navbar__logo-img"
             />
           </Link>

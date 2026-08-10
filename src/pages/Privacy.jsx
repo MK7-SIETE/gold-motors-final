@@ -22,7 +22,7 @@ export default function Privacy() {
       </div>
       <div className="container section-sm" style={{ maxWidth:'780px' }}>
         <div className="card" style={{ padding:'40px' }}>
-          <Sec title="1. Who we are"><p>Gold Motors General Dealers Limited is a vehicle dealership based in Lusaka, Zambia. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website or contact us.</p></Sec>
+          <Sec title="1. Who we are"><p>Mukuba Motors Limited is a vehicle dealership based in Lusaka, Zambia. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website or contact us.</p></Sec>
           <Sec title="2. What information we collect">
             <p style={{ marginBottom:'10px' }}>We collect personal information only when you voluntarily provide it through our website forms. This includes:</p>
             <ul style={{ paddingLeft:'20px', display:'flex', flexDirection:'column', gap:'6px' }}>
@@ -43,10 +43,10 @@ export default function Privacy() {
           <Sec title="5. Cookies and local storage"><p>Our website uses browser localStorage (not tracking cookies) to store your cookie consent decision. No personal data is stored in localStorage. We display a cookie consent notice when you first visit. You may decline without affecting your ability to use the site.</p></Sec>
           <Sec title="6. Data retention"><p>Enquiry messages are stored securely and retained as long as necessary to serve your request and for our business records. Contact us to request removal of your information.</p></Sec>
           <Sec title="7. Your rights">
-            <p style={{ marginBottom:'10px' }}>You have the right to request access to, correction of, or deletion of your personal data. Contact us at <strong>info@goldmotors.zm</strong> or <strong>+260 97X XXX XXX</strong>.</p>
+            <p style={{ marginBottom:'10px' }}>You have the right to request access to, correction of, or deletion of your personal data. Contact us at <strong>info@mukubamotors.zm</strong> or <strong>+260 97X XXX XXX</strong>.</p>
           </Sec>
           <Sec title="8. Security"><p>We take reasonable precautions to protect your personal information. Our website is served over HTTPS. Enquiry data is stored securely and accessible only to authorised staff.</p></Sec>
-          <Sec title="9. Contact"><div style={{ marginTop:'12px', padding:'16px', background:'var(--bg-elevated)', borderRadius:'var(--radius-md)', fontSize:'14px', lineHeight:2 }}><strong>Gold Motors General Dealers Limited</strong><br />Plot 1234, Cairo Road, Lusaka, Zambia<br />Email: info@goldmotors.zm<br />Phone: +260 97X XXX XXX</div></Sec>
+          <Sec title="9. Contact"><div style={{ marginTop:'12px', padding:'16px', background:'var(--bg-elevated)', borderRadius:'var(--radius-md)', fontSize:'14px', lineHeight:2 }}><strong>Mukuba Motors Limited</strong><br />Plot 1234, Cairo Road, Lusaka, Zambia<br />Email: info@mukubamotors.zm<br />Phone: +260 97X XXX XXX</div></Sec>
         </div>
       </div>
     </div>

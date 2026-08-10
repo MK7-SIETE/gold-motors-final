@@ -1,44 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&display=swap');
 
 /* ══════════════════════════════════════════════════════
-   THEME — True black + warm gold
+   THEME — Racing Green + Antique Gold (Mukuba Motors)
 ══════════════════════════════════════════════════════ */
 :root {
-  --gold:           #C9921A;
-  --gold-hover:     #B07E14;
-  --gold-deep:      #96690F;
-  --gold-light:     #FFF8EE;
-  --gold-muted:     rgba(201,146,26,0.10);
-  --gold-border:    rgba(201,146,26,0.25);
+  --gold:           #C5A45D;  /* Antique Gold — buttons, highlights, prices */
+  --gold-hover:     #D8BD7A;  /* Light Gold — hover states */
+  --gold-deep:      #9E7D3D;  /* Dark Gold — borders/details */
+  --gold-light:     #FAF8F2;  /* Off White — light gold-tinted surface */
+  --gold-muted:     rgba(197,164,93,0.10);
+  --gold-border:    rgba(197,164,93,0.25);
 
-  --black:          #0A0A0A;
-  --black-mid:      #141414;
-  --black-soft:     #1A1A1A;
-  --black-surface:  #222222;
+  --black:          #0B241B;  /* Racing Green — primary brand color */
+  --black-mid:      #071812;  /* Deep Green — darker hover/pressed state */
+  --black-soft:     #12382A;  /* Forest Green — soft dark surfaces */
+  --black-surface:  #334A3D;  /* Olive Green — lightest dark surface */
 
-  --bg:             #F8F7F4;
-  --bg-card:        #FFFFFF;
-  --bg-elevated:    #F0EDE6;
-  --bg-section:     #EAE7E0;
+  --bg:             #F3EFE5;  /* Cream — main background */
+  --bg-card:        #FFFFFF;  /* Pure White — cards */
+  --bg-elevated:    #FAF8F2;  /* Off White — elevated sections */
+  --bg-section:     #FAF8F2;  /* Off White — section fills */
 
-  --border:         #E2DDD5;
-  --border-strong:  #C8C3B8;
+  --border:         #D9D2C3;  /* Border Beige */
+  --border-strong:  #92958F;  /* Muted Gray — more visible border */
 
-  --text-primary:   #0A0A0A;
-  --text-secondary: #4A4840;
-  --text-muted:     #8A877E;
+  --text-primary:   #111412;  /* Charcoal — main text */
+  --text-secondary: #5F635F;  /* Slate Gray — secondary text */
+  --text-muted:     #92958F;  /* Muted Gray — placeholder/metadata */
 
-  --success:        #16A34A;
-  --success-bg:     #DCFCE7;
-  --danger:         #DC2626;
-  --danger-bg:      #FEE2E2;
-  --warning:        #D97706;
-  --warning-bg:     #FEF3C7;
+  --success:        #2E6B4D;  /* Success Green */
+  --success-bg:     rgba(46,107,77,0.12);
+  --danger:         #A33A32;  /* Error Red */
+  --danger-bg:      rgba(163,58,50,0.12);
+  --warning:        #9E7D3D;  /* No warning color was given — using Dark Gold, adjust if you want a true amber */
+  --warning-bg:     rgba(158,125,61,0.12);
 
-  --shadow-sm:   0 1px 3px rgba(0,0,0,0.08);
-  --shadow-md:   0 4px 16px rgba(0,0,0,0.10);
-  --shadow-lg:   0 8px 32px rgba(0,0,0,0.14);
-  --shadow-gold: 0 4px 20px rgba(201,146,26,0.28);
+  --shadow-sm:   0 1px 3px rgba(11,36,27,0.08);
+  --shadow-md:   0 4px 16px rgba(11,36,27,0.10);
+  --shadow-lg:   0 8px 32px rgba(11,36,27,0.14);
+  --shadow-gold: 0 4px 20px rgba(197,164,93,0.28);
 
   --radius-xs: 4px;
   --radius-sm: 6px;

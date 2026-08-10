@@ -55,7 +55,7 @@ export default function Profile() {
               <div style={{ display:'flex', alignItems:'center', gap:'8px', marginBottom:'18px', paddingBottom:'12px', borderBottom:'1px solid var(--border)' }}>
                 <Building size={16} style={{ color:'var(--gold-deep)' }}/><h2 style={{ fontFamily:'var(--font-display)', fontSize:'18px' }}>Dealership details</h2>
               </div>
-              {[{key:'name',label:'Business name',ph:'Gold Motors General Dealers Ltd'},{key:'phone',label:'Phone number',ph:'+260 97X XXX XXX'},{key:'email',label:'Email address',ph:'info@goldmotors.zm'},{key:'address',label:'Physical address',ph:'Plot 1234, Cairo Road, Lusaka'}].map(({key,label,ph})=>(
+              {[{key:'name',label:'Business name',ph:'Mukuba Motors Ltd'},{key:'phone',label:'Phone number',ph:'+260 97X XXX XXX'},{key:'email',label:'Email address',ph:'info@mukubamotors.zm'},{key:'address',label:'Physical address',ph:'Plot 1234, Cairo Road, Lusaka'}].map(({key,label,ph})=>(
                 <div className="form-group" key={key}><label className="label">{label}</label><input className="input" placeholder={ph} value={form[key]} onChange={set(key)}/></div>
               ))}
               <div className="form-group">

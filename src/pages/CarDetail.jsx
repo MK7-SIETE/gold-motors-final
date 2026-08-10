@@ -172,7 +172,7 @@ export default function CarDetail() {
               </form>
               <div style={{ marginTop:'14px', display:'flex', gap:'8px' }}>
                 <a href="tel:+260970000000" className="btn btn-ghost btn-sm" style={{ flex:1, justifyContent:'center' }}><Phone size={14}/> Call</a>
-                <a href="mailto:info@goldmotors.zm" className="btn btn-ghost btn-sm" style={{ flex:1, justifyContent:'center' }}><Mail size={14}/> Email</a>
+                <a href="mailto:info@mukubamotors.zm" className="btn btn-ghost btn-sm" style={{ flex:1, justifyContent:'center' }}><Mail size={14}/> Email</a>
               </div>
             </div>
           </div>

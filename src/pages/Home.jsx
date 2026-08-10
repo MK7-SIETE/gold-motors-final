@@ -191,7 +191,7 @@ export default function Home() {
       <section className="section" style={{ background:'var(--bg-section)' }}>
         <div className="container">
           <div style={{ textAlign:'center', marginBottom:'8px' }}>
-            <span className="section-label">Why Gold Motors</span>
+            <span className="section-label">Why Mukuba Motors</span>
             <h2 className="section-title" style={{ marginBottom:'12px' }}>Built on trust and results</h2>
           </div>
           <div className="features-grid">

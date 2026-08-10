@@ -23,7 +23,7 @@ export default function SourceACar() {
   const cfg       = useSiteConfig();
   const phone     = cfg.phone    || '+260 97X XXX XXX';
   const whatsapp  = cfg.whatsapp || cfg.phone || '';
-  const email     = cfg.email    || 'info@goldmotors.zm';
+  const email     = cfg.email    || 'info@mukubamotors.zm';
   const hours     = (() => {
     try {
       const h = typeof cfg.hours === 'string' ? JSON.parse(cfg.hours) : cfg.hours;

@@ -11,7 +11,7 @@ const VALUES = [
 ];
 
 const TEAM = [
-  { name:'General Manager',   role:'Gold Motors',              initials:'GM' },
+  { name:'General Manager',   role:'Mukuba Motors',              initials:'GM' },
   { name:'Sales Consultant',  role:'New & pre-owned vehicles',  initials:'SC' },
   { name:'Import Specialist', role:'Japan & UAE sourcing',      initials:'IS' },
   { name:'Finance Office',    role:'All transactions',          initials:'FO' },
@@ -19,12 +19,12 @@ const TEAM = [
 
 // Shown only if the API returns no approved reviews yet
 const FALLBACK_TESTIMONIALS = [
-  { id:1, name:'Mwansa C.',   car_bought:'Land Cruiser',   rating:5, message:'I was nervous buying a used car but the team at Gold Motors made the whole process transparent and easy. The Land Cruiser I bought has been perfect. Highly recommend.' },
+  { id:1, name:'Mwansa C.',   car_bought:'Land Cruiser',   rating:5, message:'I was nervous buying a used car but the team at Mukuba Motors made the whole process transparent and easy. The Land Cruiser I bought has been perfect. Highly recommend.' },
   { id:2, name:'Grace B.',    car_bought:'Toyota Prado',   rating:5, message:'They sourced a Toyota Prado from Japan for me within 6 weeks. The price was fair, the car arrived in excellent condition, and they handled everything. Exceptional service.' },
   { id:3, name:'David P.',    car_bought:'BMW X5',         rating:5, message:'Professional from start to finish. The BMW X5 was exactly as described. I appreciated that they never pressured me and answered every question honestly.' },
   { id:4, name:'Chanda M.',   car_bought:'First car',      rating:5, message:'Bought my first car here. The team took time to explain everything about the vehicle and the purchase process. I felt confident the whole way through.' },
   { id:5, name:'Bwalya N.',   car_bought:'Pickup truck',   rating:5, message:'Sourced a pickup from South Africa. On time, on budget, no drama. Will be coming back for my next vehicle without question.' },
-  { id:6, name:'Thandiwe K.', car_bought:'Import vehicle', rating:5, message:'The import process seemed complicated but Gold Motors made it simple. They kept me updated every step and delivered the car to my door. Outstanding.' },
+  { id:6, name:'Thandiwe K.', car_bought:'Import vehicle', rating:5, message:'The import process seemed complicated but Mukuba Motors made it simple. They kept me updated every step and delivered the car to my door. Outstanding.' },
 ];
 
 function Stars({ count }) {
@@ -51,7 +51,7 @@ export default function About() {
         <div className="container" style={{ maxWidth:'700px' }}>
           <span className="section-label">Our story</span>
           <h1 style={{ fontFamily:'var(--font-display)', fontSize:'clamp(28px,5vw,48px)', color:'#fff', lineHeight:1.2, marginBottom:'16px' }}>Built on trust.<br />Driven by quality.</h1>
-          <p style={{ fontSize:'16px', color:'rgba(255,255,255,0.65)', lineHeight:1.8 }}>Gold Motors General Dealers Limited is a Zambian pre-owned vehicle dealership with a simple mission: give every customer a vehicle they can trust, at a price that is fair, with service that is honest.</p>
+          <p style={{ fontSize:'16px', color:'rgba(255,255,255,0.65)', lineHeight:1.8 }}>Mukuba Motors Limited is a Zambian pre-owned vehicle dealership with a simple mission: give every customer a vehicle they can trust, at a price that is fair, with service that is honest.</p>
         </div>
       </div>
 
@@ -61,8 +61,8 @@ export default function About() {
             <div>
               <span className="section-label">Who we are</span>
               <h2 className="section-title" style={{ marginBottom:'16px' }}>A dealership built different</h2>
-              <p style={{ color:'var(--text-secondary)', lineHeight:1.8, marginBottom:'16px' }}>Gold Motors was founded with one belief: buying a used car in Zambia should not feel like a gamble. Too many buyers have been burned by hidden faults, inflated prices, and dishonest sellers.</p>
-              <p style={{ color:'var(--text-secondary)', lineHeight:1.8, marginBottom:'16px' }}>We started Gold Motors to change that. Every vehicle we stock is personally selected and inspected. Every price is honest. Every customer gets the same straightforward service.</p>
+              <p style={{ color:'var(--text-secondary)', lineHeight:1.8, marginBottom:'16px' }}>Mukuba Motors was founded with one belief: buying a used car in Zambia should not feel like a gamble. Too many buyers have been burned by hidden faults, inflated prices, and dishonest sellers.</p>
+              <p style={{ color:'var(--text-secondary)', lineHeight:1.8, marginBottom:'16px' }}>We started Mukuba Motors to change that. Every vehicle we stock is personally selected and inspected. Every price is honest. Every customer gets the same straightforward service.</p>
               <p style={{ color:'var(--text-secondary)', lineHeight:1.8 }}>Through our import sourcing service, we find vehicles from Japan, UAE, UK and South Africa — giving Zambian buyers access to the global market without the risk of navigating it alone.</p>
             </div>
             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'16px' }}>

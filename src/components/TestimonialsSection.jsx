@@ -4,7 +4,7 @@ import { api } from '../services/api';
 
 const FALLBACK = [
   { id: 1, name: 'Chanda M.',  car_bought: 'Toyota Hilux 2020',  message: 'Excellent service and very professional team. My Hilux was in perfect condition — exactly as advertised.', rating: 5 },
-  { id: 2, name: 'Grace N.',   car_bought: 'Honda CR-V 2019',    message: 'Smooth process from viewing to driving away the same week. Highly recommend Gold Motors to anyone looking for a reliable car.', rating: 5 },
+  { id: 2, name: 'Grace N.',   car_bought: 'Honda CR-V 2019',    message: 'Smooth process from viewing to driving away the same week. Highly recommend Mukuba Motors to anyone looking for a reliable car.', rating: 5 },
   { id: 3, name: 'Peter K.',   car_bought: 'Nissan X-Trail 2018', message: 'Fair pricing and honest advice. They helped me find exactly what I needed within my budget. Will come back for my next car.', rating: 4 },
 ];
 

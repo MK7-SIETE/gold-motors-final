@@ -66,7 +66,7 @@ export default function AdminLayout() {
   const SidebarContent = () => (
     <>
       <div style={{ padding:'20px', borderBottom:'1px solid rgba(255,255,255,0.07)' }}>
-        <img src={logo} alt="Gold Motors" style={{ height:'42px', objectFit:'contain', display:'block' }}/>
+        <img src={logo} alt="Mukuba Motors" style={{ height:'42px', objectFit:'contain', display:'block' }}/>
         <p style={{ fontSize:'10px', color:'rgba(255,255,255,0.3)', marginTop:'8px', letterSpacing:'0.06em', textTransform:'uppercase' }}>Dealer admin panel</p>
       </div>
       <nav style={{ flex:1, padding:'12px 8px', overflowY:'auto' }}>

@@ -4,7 +4,7 @@ import { api } from '../../services/api';
 
 const TYPE_LABELS = {
   custom:    { label: 'General Message', icon: FileText, color: '#6c757d' },
-  new_car:   { label: 'New Car Arrival', icon: Car,      color: '#b8860b' },
+  new_car:   { label: 'New Car Arrival', icon: Car,      color: '#C5A45D' },
   promotion: { label: 'Promotion',       icon: Tag,      color: '#28a745' },
 };
 
@@ -14,7 +14,7 @@ const inputStyle = {
   fontFamily: 'inherit', outline: 'none',
 };
 const labelStyle = { display: 'block', fontWeight: 600, fontSize: '13px', marginBottom: '6px', color: '#444' };
-const btnStyle = (color = '#b8860b', text = '#fff') => ({
+const btnStyle = (color = '#C5A45D', text = '#fff') => ({
   display: 'inline-flex', alignItems: 'center', gap: '6px',
   padding: '10px 20px', borderRadius: '6px', border: 'none',
   background: color, color: text, fontWeight: 600, fontSize: '14px',
@@ -174,7 +174,7 @@ export default function SuperNewsletter() {
       {/* Stats row */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 28 }}>
         {[
-          { label: 'Active Subscribers', value: subscribers.active, icon: Users,       color: '#b8860b' },
+          { label: 'Active Subscribers', value: subscribers.active, icon: Users,       color: '#C5A45D' },
           { label: 'Total Sent',          value: newsletters.filter(n => n.status === 'sent').length, icon: CheckCircle, color: '#28a745' },
           { label: 'Drafts',              value: newsletters.filter(n => n.status === 'draft').length, icon: Clock, color: '#6c757d' },
         ].map(({ label, value, icon: Icon, color }) => (
@@ -255,7 +255,7 @@ export default function SuperNewsletter() {
                   <span>{typeInfo.label}</span>
                   {nl.car && <span>🚗 {nl.car.year} {nl.car.make} {nl.car.model}</span>}
                   {isSent && <span>✅ Sent to {nl.recipients_count} · {new Date(nl.sent_at).toLocaleDateString()}</span>}
-                  {!isSent && <span style={{ color: '#b8860b' }}>📝 Draft</span>}
+                  {!isSent && <span style={{ color: '#C5A45D' }}>📝 Draft</span>}
                 </div>
               </div>
               <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
@@ -350,21 +350,21 @@ export default function SuperNewsletter() {
               <h3 style={{ margin: 0 }}>Preview</h3>
               <button onClick={() => setPreviewId(null)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><X size={20} /></button>
             </div>
-            <div style={{ background: '#b8860b', borderRadius: '8px 8px 0 0', padding: '24px 28px', textAlign: 'center' }}>
-              <div style={{ color: '#fff', fontWeight: 700, fontSize: 20 }}>Gold Motors</div>
+            <div style={{ background: '#C5A45D', borderRadius: '8px 8px 0 0', padding: '24px 28px', textAlign: 'center' }}>
+              <div style={{ color: '#fff', fontWeight: 700, fontSize: 20 }}>Mukuba Motors</div>
             </div>
             <div style={{ border: '1px solid #eee', borderTop: 'none', borderRadius: '0 0 8px 8px', padding: '24px 28px' }}>
-              {previewItem.type === 'promotion' && <span style={{ background: '#b8860b', color: '#fff', padding: '3px 14px', borderRadius: 20, fontSize: 12, fontWeight: 700 }}>🎉 Special Promotion</span>}
-              {previewItem.type === 'new_car'   && <span style={{ background: '#b8860b', color: '#fff', padding: '3px 14px', borderRadius: 20, fontSize: 12, fontWeight: 700 }}>🚗 New Arrival</span>}
-              <div style={{ fontSize: 18, fontWeight: 700, color: '#b8860b', margin: '16px 0 12px' }}>{previewItem.subject}</div>
+              {previewItem.type === 'promotion' && <span style={{ background: '#C5A45D', color: '#fff', padding: '3px 14px', borderRadius: 20, fontSize: 12, fontWeight: 700 }}>🎉 Special Promotion</span>}
+              {previewItem.type === 'new_car'   && <span style={{ background: '#C5A45D', color: '#fff', padding: '3px 14px', borderRadius: 20, fontSize: 12, fontWeight: 700 }}>🚗 New Arrival</span>}
+              <div style={{ fontSize: 18, fontWeight: 700, color: '#C5A45D', margin: '16px 0 12px' }}>{previewItem.subject}</div>
               {previewItem.car && (
                 <div style={{ border: '1px solid #eee', borderRadius: 8, padding: '12px 16px', marginBottom: 16, fontSize: 14 }}>
                   <strong>🚗 {previewItem.car.year} {previewItem.car.make} {previewItem.car.model}</strong>
-                  {previewItem.car.price && <div style={{ color: '#b8860b', fontWeight: 700 }}>ZMW {Number(previewItem.car.price).toLocaleString()}</div>}
+                  {previewItem.car.price && <div style={{ color: '#C5A45D', fontWeight: 700 }}>ZMW {Number(previewItem.car.price).toLocaleString()}</div>}
                 </div>
               )}
               {previewItem.body && <div style={{ fontSize: 14, lineHeight: 1.7, whiteSpace: 'pre-line' }}>{previewItem.body}</div>}
-              <div style={{ background: '#b8860b', color: '#fff', textAlign: 'center', padding: '12px', borderRadius: 6, marginTop: 20, fontWeight: 600 }}>View Our Full Inventory →</div>
+              <div style={{ background: '#C5A45D', color: '#fff', textAlign: 'center', padding: '12px', borderRadius: 6, marginTop: 20, fontWeight: 600 }}>View Our Full Inventory →</div>
             </div>
             <div style={{ marginTop: 16, display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
               <button style={btnStyle('#f5f5f5', '#333')} onClick={() => setPreviewId(null)}>Close</button>
@@ -397,7 +397,7 @@ export default function SuperNewsletter() {
       {confirmSend && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.5)', zIndex: 1001, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ background: '#fff', borderRadius: 12, padding: 32, maxWidth: 380, textAlign: 'center' }}>
-            <Send size={36} color="#b8860b" style={{ marginBottom: 12 }} />
+            <Send size={36} color="#C5A45D" style={{ marginBottom: 12 }} />
             <h3 style={{ margin: '0 0 8px' }}>Send newsletter?</h3>
             <p style={{ color: '#888', marginBottom: 24 }}>This will be sent to <strong>{subscribers.active} active subscribers</strong>. This cannot be undone.</p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>

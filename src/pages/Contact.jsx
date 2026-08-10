@@ -9,7 +9,7 @@ export default function Contact() {
 
   const phone   = cfg.phone    || '+260 97X XXX XXX';
   const whatsapp= cfg.whatsapp || cfg.phone || '';
-  const email   = cfg.email    || 'info@goldmotors.zm';
+  const email   = cfg.email    || 'info@mukubamotors.zm';
   const address = [cfg.address, cfg.city, cfg.country].filter(Boolean).join(', ') || 'Plot 1234, Cairo Road, Lusaka, Zambia';
 
   // Parse business hours from config

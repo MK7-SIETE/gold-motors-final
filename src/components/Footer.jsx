@@ -8,7 +8,7 @@ export default function Footer() {
   const cfg  = useSiteConfig();
 
   const phone   = cfg.phone   || '+260 97X XXX XXX';
-  const email   = cfg.email   || 'info@goldmotors.zm';
+  const email   = cfg.email   || 'info@mukubamotors.zm';
   const address = [cfg.address, cfg.city, cfg.country].filter(Boolean).join(', ') || 'Lusaka, Zambia';
   const hours   = (() => {
     try {
@@ -40,7 +40,7 @@ export default function Footer() {
               <div style={{ marginBottom: '16px' }}>
                 <img
                   src={logo}
-                  alt="Gold Motors"
+                  alt="Mukuba Motors"
                   style={{ height: '48px', width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }}
                 />
               </div>
@@ -98,7 +98,7 @@ export default function Footer() {
       </div>
       <div className="container">
         <div className="footer__bottom">
-          <p className="footer__copy">© {year} {cfg.dealership_name || 'Gold Motors General Dealers Ltd'}. All rights reserved.</p>
+          <p className="footer__copy">© {year} {cfg.dealership_name || 'Mukuba Motors Ltd'}. All rights reserved.</p>
         </div>
       </div>
     </footer>

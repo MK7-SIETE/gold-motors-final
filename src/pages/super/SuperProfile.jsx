@@ -164,7 +164,7 @@ export default function SuperProfile() {
             {/* Dealership identity */}
             <div style={cardStyle}>
               <div style={sectionHeadStyle}><Building size={14} /> Dealership details</div>
-              <Field label="Dealership name"       name="dealership_name"     value={form.dealership_name}     onChange={handleChange} placeholder="Gold Motors General Dealers Ltd" />
+              <Field label="Dealership name"       name="dealership_name"     value={form.dealership_name}     onChange={handleChange} placeholder="Mukuba Motors Ltd" />
               <Field label="Registration number"   name="registration_number" value={form.registration_number} onChange={handleChange} placeholder="e.g. 120240012345" />
               <Field label="About"                 name="about" type="textarea" value={form.about}             onChange={handleChange} placeholder="Tell customers about your dealership..." />
             </div>
@@ -176,7 +176,7 @@ export default function SuperProfile() {
                 <Field label="Phone number"  name="phone"    value={form.phone}    onChange={handleChange} placeholder="+260 97X XXX XXX" />
                 <Field label="WhatsApp"      name="whatsapp" value={form.whatsapp} onChange={handleChange} placeholder="+260 97X XXX XXX" />
               </div>
-              <Field label="Email address" name="email" type="email" value={form.email} onChange={handleChange} placeholder="info@goldmotors.zm" />
+              <Field label="Email address" name="email" type="email" value={form.email} onChange={handleChange} placeholder="info@mukubamotors.zm" />
             </div>
 
             {/* Location */}
