@@ -130,13 +130,13 @@ export default function TestimonialsSection() {
                 <div style={{ marginBottom: '12px' }}>
                   <label className="label" style={{ color: 'rgba(255,255,255,0.6)' }}>Rating *</label>
                   <select name="rating" className="select" value={form.rating} onChange={handle}
-                    style={{ background: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.15)', color: '#fff' }}>
-                    <option value={5}>★★★★★ — Excellent</option>
-                    <option value={4}>★★★★☆ — Very Good</option>
-                    <option value={3}>★★★☆☆ — Good</option>
-                    <option value={2}>★★☆☆☆ — Fair</option>
-                    <option value={1}>★☆☆☆☆ — Poor</option>
-                  </select>
+  style={{ background: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.15)', color: '#fff' }}>
+  <option value={5} style={{ background: '#12382A', color: '#fff' }}>★★★★★ — Excellent</option>
+  <option value={4} style={{ background: '#12382A', color: '#fff' }}>★★★★☆ — Very Good</option>
+  <option value={3} style={{ background: '#12382A', color: '#fff' }}>★★★☆☆ — Good</option>
+  <option value={2} style={{ background: '#12382A', color: '#fff' }}>★★☆☆☆ — Fair</option>
+  <option value={1} style={{ background: '#12382A', color: '#fff' }}>★☆☆☆☆ — Poor</option>
+</select>
                 </div>
                 <div style={{ marginBottom: '16px' }}>
                   <label className="label" style={{ color: 'rgba(255,255,255,0.6)' }}>Your review *</label>
