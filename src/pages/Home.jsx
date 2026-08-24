@@ -36,6 +36,9 @@ const FILTERS = [
   { label: 'Manual',    href: '/inventory?transmission=Manual' },
 ];
 
+// Only DEFAULT_HERO_IMAGES[0] is ever actually shown — see isPlaceholder below.
+// Kept as an array (rather than a single string) so it still works as a
+// last-resort fallback if the real hero-images endpoint never returns data.
 const DEFAULT_HERO_IMAGES = [
   'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1600&q=80',
   'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=80',
@@ -66,7 +69,8 @@ export default function Home() {
   );
 
   // Preload hero images before swapping them in, so the hero crossfades
-  // instead of popping the moment the fetch resolves.
+  // instead of popping the moment the fetch resolves. bgIndex resets to 0
+  // each time a new set swaps in, so the slideshow always starts clean.
   const [readyHeroImages, setReadyHeroImages] = useState(DEFAULT_HERO_IMAGES);
   useEffect(() => {
     if (!heroImages?.length) return;
@@ -75,14 +79,27 @@ export default function Home() {
       const img = new window.Image();
       img.onload = img.onerror = res;
       img.src = src;
-    }))).then(() => { if (!cancelled) setReadyHeroImages(heroImages); });
+    }))).then(() => {
+      if (cancelled) return;
+      setReadyHeroImages(heroImages);
+      setBgIndex(0);
+    });
     return () => { cancelled = true; };
   }, [heroImages]);
 
+  // True while we're still showing the generic stock fallback rather than
+  // your real hero images. Reference check works because readyHeroImages
+  // only ever equals the exact DEFAULT_HERO_IMAGES array while placeholder,
+  // and gets swapped to a distinct array once real images are ready.
+  const isPlaceholder = readyHeroImages === DEFAULT_HERO_IMAGES;
+
+  // Only rotate once we're showing real images — a single frozen frame
+  // while placeholder means visitors never see stock photos cycle past.
   useEffect(() => {
+    if (isPlaceholder) return;
     const t = setInterval(() => setBgIndex(i => (i + 1) % readyHeroImages.length), 6000);
     return () => clearInterval(t);
-  }, [readyHeroImages.length]);
+  }, [isPlaceholder, readyHeroImages.length]);
 
   useEffect(() => {
     api.getCars({ per_page: 1 })
@@ -100,18 +117,26 @@ export default function Home() {
   return (
     <>
       <section className="hero">
-        {readyHeroImages.map((img, i) => (
+        {isPlaceholder ? (
           <div
-            key={img}
             className="hero__bg"
             aria-hidden="true"
-            style={{
-              backgroundImage: `url(${img})`,
-              opacity: i === bgIndex ? 1 : 0,
-              transition: 'opacity 1.2s ease-in-out',
-            }}
+            style={{ backgroundImage: `url(${DEFAULT_HERO_IMAGES[0]})`, opacity: 1 }}
           />
-        ))}
+        ) : (
+          readyHeroImages.map((img, i) => (
+            <div
+              key={img}
+              className="hero__bg"
+              aria-hidden="true"
+              style={{
+                backgroundImage: `url(${img})`,
+                opacity: i === bgIndex ? 1 : 0,
+                transition: 'opacity 1.2s ease-in-out',
+              }}
+            />
+          ))
+        )}
         <div className="hero__overlay" aria-hidden="true" />
         <div
           className="hero__mobile-bg"
