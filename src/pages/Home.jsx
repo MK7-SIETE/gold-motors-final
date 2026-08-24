@@ -3,7 +3,9 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, ArrowRight, Shield, Clock, Award, Phone, Globe, CheckCircle, ChevronRight } from 'lucide-react';
 import CarCard from '../components/CarCard';
+import CarCardSkeleton from '../components/CarCardSkeleton';
 import { api } from '../services/api';
+import { useCachedFetch } from '../hooks/useCachedFetch';
 import NewsletterSection from '../components/NewsletterSection';
 
 const WHY_US = [
@@ -34,40 +36,57 @@ const FILTERS = [
   { label: 'Manual',    href: '/inventory?transmission=Manual' },
 ];
 
+const DEFAULT_HERO_IMAGES = [
+  'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1600&q=80',
+  'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=80',
+  'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600&q=80',
+];
+
 const MOBILE_FALLBACK = 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80';
 
 export default function Home() {
-  const [bgIndex, setBgIndex]           = useState(0);
-  const [query, setQuery]               = useState('');
-  const [featuredCars, setFeaturedCars] = useState([]);
-  const [stats, setStats]               = useState({ available: 0 });
-  const [heroImages, setHeroImages]     = useState([
-    'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1600&q=80',
-    'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=80',
-    'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600&q=80',
-  ]);
+  const [bgIndex, setBgIndex] = useState(0);
+  const [query, setQuery]     = useState('');
+  const [stats, setStats]     = useState({ available: 0 });
   const navigate = useNavigate();
 
+  // Cached fetch for featured cars — shows cached data instantly on repeat
+  // visits while a fresh copy loads quietly in the background.
+  const { data: featuredCars, isLoading: featuredLoading } = useCachedFetch(
+    'featured-cars',
+    () => api.getFeatured().then(d => (Array.isArray(d) ? d.slice(0, 3) : [])),
+    []
+  );
+
+  // Same pattern for hero images.
+  const { data: heroImages } = useCachedFetch(
+    'hero-images',
+    () => api.getHeroImages().then(d => (Array.isArray(d) && d.length ? d.map(img => img.url) : DEFAULT_HERO_IMAGES)),
+    DEFAULT_HERO_IMAGES
+  );
+
+  // Preload hero images before swapping them in, so the hero crossfades
+  // instead of popping the moment the fetch resolves.
+  const [readyHeroImages, setReadyHeroImages] = useState(DEFAULT_HERO_IMAGES);
   useEffect(() => {
-    const t = setInterval(() => setBgIndex(i => (i + 1) % heroImages.length), 6000);
+    if (!heroImages?.length) return;
+    let cancelled = false;
+    Promise.all(heroImages.map(src => new Promise(res => {
+      const img = new window.Image();
+      img.onload = img.onerror = res;
+      img.src = src;
+    }))).then(() => { if (!cancelled) setReadyHeroImages(heroImages); });
+    return () => { cancelled = true; };
+  }, [heroImages]);
+
+  useEffect(() => {
+    const t = setInterval(() => setBgIndex(i => (i + 1) % readyHeroImages.length), 6000);
     return () => clearInterval(t);
-  }, [heroImages.length]);
+  }, [readyHeroImages.length]);
 
   useEffect(() => {
-    api.getFeatured()
-      .then(data => setFeaturedCars(Array.isArray(data) ? data.slice(0, 3) : []))
-      .catch(() => setFeaturedCars([]));
-
     api.getCars({ per_page: 1 })
       .then(data => setStats({ available: data.total || data.length || 0 }))
-      .catch(() => {});
-
-    api.getHeroImages()
-      .then(data => {
-        if (Array.isArray(data) && data.length > 0) {
-          setHeroImages(data.map(img => img.url));
-        }
-      })
       .catch(() => {});
   }, []);
 
@@ -76,12 +95,12 @@ export default function Home() {
     navigate(query.trim() ? '/inventory?search=' + encodeURIComponent(query) : '/inventory');
   };
 
-  const mobileImage = heroImages[0] || MOBILE_FALLBACK;
+  const mobileImage = readyHeroImages[0] || MOBILE_FALLBACK;
 
   return (
     <>
       <section className="hero">
-        {heroImages.map((img, i) => (
+        {readyHeroImages.map((img, i) => (
           <div
             key={img}
             className="hero__bg"
@@ -153,8 +172,10 @@ export default function Home() {
             <div><span className="section-label">Our selection</span><h2 className="section-title">Featured vehicles</h2></div>
             <Link to="/inventory" className="btn btn-ghost btn-sm">View all <ChevronRight size={15} /></Link>
           </div>
-          {featuredCars.length === 0 ? (
-            <div style={{ textAlign:'center', padding:'40px', color:'var(--text-muted)' }}>Loading vehicles...</div>
+          {featuredLoading ? (
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))', gap:'20px' }}>
+              {[1, 2, 3].map(i => <CarCardSkeleton key={i} />)}
+            </div>
           ) : (
             <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))', gap:'20px' }}>
               {featuredCars.map(car => <div key={car.id} className="card card-hover"><CarCard car={car} /></div>)}
