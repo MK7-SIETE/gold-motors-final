@@ -595,3 +595,66 @@ h1,h2,h3,h4,h5 { font-family:var(--font-display); font-weight:600; line-height:1
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+/* ============================
+   Car Detail — responsive
+   ============================ */
+
+.car-detail__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.car-detail__gallery-img { height: 360px; }
+.car-detail__thumb { width: 72px; height: 52px; }
+.car-detail__specs-grid { grid-template-columns: 1fr 1fr; }
+
+.car-detail__sidebar {
+  position: sticky;
+  top: calc(var(--topbar-height) + var(--nav-height) + 20px);
+}
+
+.car-detail__sidebar-card { padding: 24px; margin-bottom: 16px; }
+.car-detail__title { font-size: 26px; }
+.car-detail__price { font-size: 28px; }
+.car-detail__section-title { font-size: 20px; }
+.car-detail__related-title { font-size: 24px; }
+
+.car-detail__related-grid {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Tablet — keep two columns, just tighten things up */
+@media (max-width: 1024px) {
+  .car-detail__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
+    gap: 24px;
+  }
+  .car-detail__gallery-img { height: 320px; }
+}
+
+/* Mobile — stack to a single column */
+@media (max-width: 640px) {
+  .car-detail__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .car-detail__sidebar {
+    position: static;
+    top: auto;
+  }
+  .car-detail__gallery-img { height: 240px; }
+  .car-detail__thumb { width: 60px; height: 44px; }
+  .car-detail__specs-grid { grid-template-columns: 1fr; }
+  .car-detail__sidebar-card { padding: 18px; }
+  .car-detail__title { font-size: 22px; }
+  .car-detail__price { font-size: 24px; }
+  .car-detail__section-title { font-size: 18px; }
+  .car-detail__related-title { font-size: 20px; }
+  .car-detail__related-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+}
