@@ -91,9 +91,9 @@ export default function CarDetail() {
       </div>
 
       <div className="container section-sm">
-        <div style={{ display:'grid', gridTemplateColumns:'minmax(0,1.4fr) minmax(0,1fr)', gap:'32px', alignItems:'start' }}>
+        <div className="car-detail__grid">
           <div>
-            <div style={{ borderRadius:'var(--radius-lg)', overflow:'hidden', background:'var(--bg-elevated)', height:'360px', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:'12px', border:'1px solid var(--border)' }}>
+            <div className="car-detail__gallery-img" style={{ borderRadius:'var(--radius-lg)', overflow:'hidden', background:'var(--bg-elevated)', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:'12px', border:'1px solid var(--border)' }}>
               {images.length > 0
                 ? <img src={images[activeImg].url} alt={car.make+' '+car.model} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
                 : <div style={{ fontSize:'64px', opacity:0.2 }}>🚗</div>
@@ -102,7 +102,7 @@ export default function CarDetail() {
             {images.length > 1 && (
               <div style={{ display:'flex', gap:'8px', overflowX:'auto' }}>
                 {images.map((img, i) => (
-                  <button key={img.id} onClick={() => setActiveImg(i)} style={{ flexShrink:0, width:'72px', height:'52px', borderRadius:'8px', overflow:'hidden', border:'2px solid '+(i===activeImg?'var(--gold)':'var(--border)'), cursor:'pointer', padding:0 }}>
+                  <button key={img.id} onClick={() => setActiveImg(i)} className="car-detail__thumb" style={{ flexShrink:0, borderRadius:'8px', overflow:'hidden', border:'2px solid '+(i===activeImg?'var(--gold)':'var(--border)'), cursor:'pointer', padding:0 }}>
                     <img src={img.url} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
                   </button>
                 ))}
@@ -110,8 +110,8 @@ export default function CarDetail() {
             )}
 
             <div style={{ marginTop:'28px' }}>
-              <h3 style={{ fontFamily:'var(--font-display)', fontSize:'20px', marginBottom:'16px' }}>Specifications</h3>
-              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1px', background:'var(--border)', borderRadius:'var(--radius-md)', overflow:'hidden', border:'1px solid var(--border)' }}>
+              <h3 className="car-detail__section-title" style={{ fontFamily:'var(--font-display)', marginBottom:'16px' }}>Specifications</h3>
+              <div className="car-detail__specs-grid" style={{ display:'grid', gap:'1px', background:'var(--border)', borderRadius:'var(--radius-md)', overflow:'hidden', border:'1px solid var(--border)' }}>
                 {specs.map(({ icon:Icon, label, value }) => (
                   <div key={label} style={{ background:'var(--bg-card)', padding:'12px 14px', display:'flex', alignItems:'flex-start', gap:'10px' }}>
                     <Icon size={15} style={{ color:'var(--gold-deep)', flexShrink:0, marginTop:'2px' }}/>
@@ -126,7 +126,7 @@ export default function CarDetail() {
 
             {car.features?.length > 0 && (
               <div style={{ marginTop:'24px' }}>
-                <h3 style={{ fontFamily:'var(--font-display)', fontSize:'20px', marginBottom:'14px' }}>Features</h3>
+                <h3 className="car-detail__section-title" style={{ fontFamily:'var(--font-display)', marginBottom:'14px' }}>Features</h3>
                 <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' }}>
                   {car.features.map(f => (
                     <div key={f} style={{ display:'flex', alignItems:'center', gap:'6px', padding:'6px 12px', background:'var(--bg-card)', border:'1px solid var(--border)', borderRadius:'20px', fontSize:'13px', color:'var(--text-secondary)' }}>
@@ -139,18 +139,18 @@ export default function CarDetail() {
 
             {car.description && (
               <div style={{ marginTop:'24px' }}>
-                <h3 style={{ fontFamily:'var(--font-display)', fontSize:'20px', marginBottom:'10px' }}>About this vehicle</h3>
+                <h3 className="car-detail__section-title" style={{ fontFamily:'var(--font-display)', marginBottom:'10px' }}>About this vehicle</h3>
                 <p style={{ fontSize:'14px', color:'var(--text-secondary)', lineHeight:1.7 }}>{car.description}</p>
               </div>
             )}
           </div>
 
-          <div style={{ position:'sticky', top:'calc(var(--topbar-height) + var(--nav-height) + 20px)' }}>
-            <div className="card" style={{ padding:'24px', marginBottom:'16px' }}>
+          <div className="car-detail__sidebar">
+            <div className="card car-detail__sidebar-card">
               {car.is_featured && <div className="badge badge-gold" style={{ marginBottom:'10px' }}>Featured</div>}
               <p style={{ fontSize:'13px', color:'var(--text-muted)', marginBottom:'4px' }}>{car.year} · {car.condition} · {car.body_type}</p>
-              <h1 style={{ fontFamily:'var(--font-display)', fontSize:'26px', color:'var(--text-primary)', lineHeight:1.2, marginBottom:'8px' }}>{car.make} {car.model}</h1>
-              <p style={{ fontSize:'28px', fontWeight:700, color:'var(--gold-deep)', marginBottom:'16px' }}>{formatPrice(car.price)}</p>
+              <h1 className="car-detail__title" style={{ fontFamily:'var(--font-display)', color:'var(--text-primary)', lineHeight:1.2, marginBottom:'8px' }}>{car.make} {car.model}</h1>
+              <p className="car-detail__price" style={{ fontWeight:700, color:'var(--gold-deep)', marginBottom:'16px' }}>{formatPrice(car.price)}</p>
               <div style={{ display:'flex', gap:'6px', flexWrap:'wrap', marginBottom:'20px' }}>
                 <span className="badge badge-muted"><Gauge size={11}/>{Number(car.mileage).toLocaleString()} km</span>
                 <span className="badge badge-muted"><Fuel size={11}/>{car.fuel}</span>
@@ -181,10 +181,10 @@ export default function CarDetail() {
         {related.length > 0 && (
           <div style={{ marginTop:'48px' }}>
             <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'20px' }}>
-              <h2 style={{ fontFamily:'var(--font-display)', fontSize:'24px' }}>You may also like</h2>
+              <h2 className="car-detail__related-title" style={{ fontFamily:'var(--font-display)' }}>You may also like</h2>
               <Link to="/inventory" className="btn btn-ghost btn-sm">View all</Link>
             </div>
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(260px,1fr))', gap:'20px' }}>
+            <div className="car-detail__related-grid" style={{ display:'grid' }}>
               {related.map(c => <div key={c.id} className="card card-hover"><CarCard car={c}/></div>)}
             </div>
           </div>
