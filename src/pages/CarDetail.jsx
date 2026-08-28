@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ChevronLeft, Fuel, Gauge, Settings, Calendar, Palette, Users, DoorOpen, Zap, Layers, Shield, Phone, Mail, CheckCircle, AlertCircle } from 'lucide-react';
+import { ChevronLeft, Fuel, Gauge, Settings, Calendar, Palette, Users, DoorOpen, Zap, Layers, Shield, Phone, Mail, CheckCircle, AlertCircle, Compass, Globe, FileText, UserCheck } from 'lucide-react';
 import { api } from '../services/api';
 import Toast from '../components/Toast';
 import CarCard from '../components/CarCard';
@@ -61,19 +61,23 @@ export default function CarDetail() {
   );
 
   const specs = [
-    { icon:Calendar, label:'Year',         value:car.year                         },
-    { icon:Gauge,    label:'Mileage',       value:Number(car.mileage).toLocaleString()+' km' },
-    { icon:Fuel,     label:'Fuel type',     value:car.fuel                         },
-    { icon:Settings, label:'Transmission',  value:car.transmission                 },
-    { icon:Palette,  label:'Colour',        value:car.color                        },
-    { icon:Layers,   label:'Body type',     value:car.body_type                    },
-    { icon:Zap,      label:'Engine',        value:car.engine                       },
-    { icon:Zap,      label:'Power',         value:car.power                        },
-    { icon:Zap,      label:'Torque',        value:car.torque                       },
-    { icon:Users,    label:'Seats',         value:car.seats                        },
-    { icon:DoorOpen, label:'Doors',         value:car.doors                        },
-    { icon:Settings, label:'Drive',         value:car.drive                        },
-    { icon:Shield,   label:'Condition',     value:car.condition                    },
+    { icon:Calendar,   label:'Year',                value:car.year                                    },
+    { icon:Gauge,      label:'Mileage',              value:Number(car.mileage).toLocaleString()+' km'  },
+    { icon:Fuel,       label:'Fuel type',            value:car.fuel                                    },
+    { icon:Settings,   label:'Transmission',         value:car.transmission                            },
+    { icon:Compass,    label:'Drive side',           value:car.drive_side                              },
+    { icon:Settings,   label:'Drive',                value:car.drive                                   },
+    { icon:Palette,    label:'Colour',               value:car.color                                   },
+    { icon:Layers,     label:'Body type',            value:car.body_type                               },
+    { icon:Zap,        label:'Engine',               value:car.engine                                  },
+    { icon:Zap,        label:'Power',                value:car.power                                   },
+    { icon:Zap,        label:'Torque',               value:car.torque                                  },
+    { icon:Users,      label:'Seats',                value:car.seats                                   },
+    { icon:DoorOpen,   label:'Doors',                value:car.doors                                   },
+    { icon:Shield,     label:'Condition',            value:car.condition                               },
+    { icon:UserCheck,  label:'Previous owners',      value:car.previous_owners                         },
+    { icon:Globe,      label:'Import origin',        value:car.import_origin                           },
+    { icon:FileText,   label:'Registration status',  value:car.registration_status                     },
   ].filter(s => s.value);
 
   const images = car.images || [];
