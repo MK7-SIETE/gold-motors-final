@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Upload, Star, ArrowLeft, Save } from 'lucide-react';
 import { api } from '../../services/api';
 import Toast from '../../components/Toast';
+import { useDraft, loadDraft, clearDraft, timeAgo } from '../../hooks/useDraft';
 
 const FIELDS = [
   {key:'make',    label:'Make *',       placeholder:'e.g. Toyota',         type:'text'},
@@ -14,6 +15,8 @@ const FIELDS = [
   {key:'engine',  label:'Engine',       placeholder:'e.g. 4.5L V8',         type:'text'},
   {key:'power',   label:'Power',        placeholder:'e.g. 232hp',           type:'text'},
   {key:'torque',  label:'Torque',       placeholder:'e.g. 650Nm',           type:'text'},
+  {key:'vin',             label:'VIN / Chassis number', placeholder:'e.g. JTMHV05J...', type:'text'},
+  {key:'previous_owners', label:'Previous owners',      placeholder:'e.g. 1',           type:'number'},
 ];
 
 const SELECTS = [
@@ -24,9 +27,21 @@ const SELECTS = [
   {key:'seats',        label:'Seats',        options:['2','4','5','6','7','8','9']},
   {key:'doors',        label:'Doors',        options:['2','3','4','5']},
   {key:'drive',        label:'Drive',        options:['FWD','RWD','AWD','4WD']},
+  {key:'drive_side',          label:'Drive side',          options:['Right-hand drive (RHD)','Left-hand drive (LHD)']},
+  {key:'import_origin',       label:'Import origin',       options:['Japan','UAE','United Kingdom','South Africa','Zambia (local)','Other']},
+  {key:'registration_status', label:'Registration status', options:['Registered (local plates)','Not yet registered','In transit / clearing']},
 ];
 
-const EMPTY = { make:'',model:'',year:'',price:'',mileage:'',color:'',engine:'',power:'',torque:'',fuel:'Petrol',transmission:'Automatic',body_type:'SUV',condition:'Foreign Used',seats:'5',doors:'4',drive:'AWD',description:'',is_featured:false,is_available:true };
+const EMPTY = {
+  make:'',model:'',year:'',price:'',mileage:'',color:'',engine:'',power:'',torque:'',
+  vin:'',previous_owners:'',
+  fuel:'Petrol',transmission:'Automatic',body_type:'SUV',condition:'Foreign Used',
+  seats:'5',doors:'4',drive:'AWD',
+  drive_side:'Right-hand drive (RHD)',import_origin:'Japan',registration_status:'Registered (local plates)',
+  description:'',is_featured:false,is_available:true,
+};
+
+const DRAFT_KEY = 'mm_draft_add_car';
 
 export default function AddEditCar() {
   const { id } = useParams();
@@ -47,9 +62,13 @@ export default function AddEditCar() {
         make: car.make||'', model: car.model||'', year: car.year||'',
         price: car.price||'', mileage: car.mileage||'', color: car.color||'',
         engine: car.engine||'', power: car.power||'', torque: car.torque||'',
+        vin: car.vin||'', previous_owners: car.previous_owners||'',
         fuel: car.fuel||'Petrol', transmission: car.transmission||'Automatic',
         body_type: car.body_type||'SUV', condition: car.condition||'Foreign Used',
         seats: String(car.seats||5), doors: String(car.doors||4), drive: car.drive||'AWD',
+        drive_side: car.drive_side||'Right-hand drive (RHD)',
+        import_origin: car.import_origin||'Japan',
+        registration_status: car.registration_status||'Registered (local plates)',
         description: car.description||'', is_featured: !!car.is_featured, is_available: !!car.is_available,
       });
       setFeatures((car.features||[]).join(', '));
@@ -57,6 +76,23 @@ export default function AddEditCar() {
       setLoading(false);
     }).catch(() => setLoading(false));
   }, [id]);
+
+  // Restore an unsaved draft when starting a NEW car. Editing an existing
+  // car already loads real data above, so drafts don't apply there.
+  useEffect(() => {
+    if (isEdit) return;
+    const draft = loadDraft(DRAFT_KEY);
+    if (draft?.value) {
+      setForm(f => ({ ...f, ...draft.value.form }));
+      setFeatures(draft.value.features || '');
+      setToast({ message: 'Restored your unsaved draft from ' + timeAgo(draft.savedAt) + '.', type:'success' });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Quietly auto-saves as you type. Only active while adding a new car —
+  // disabled during edit so a stale draft can never overwrite real data.
+  useDraft(DRAFT_KEY, { form, features }, !isEdit);
 
   const set = k => e => setForm(f => ({...f, [k]: e.target.value}));
   const setCheck = k => e => setForm(f => ({...f, [k]: e.target.checked}));
@@ -72,6 +108,7 @@ export default function AddEditCar() {
       features: features.split(',').map(f => f.trim()).filter(Boolean),
       year: Number(form.year), price: Number(form.price), mileage: Number(form.mileage)||0,
       seats: Number(form.seats), doors: Number(form.doors),
+      previous_owners: Number(form.previous_owners)||0,
     };
     try {
       if (isEdit) {
@@ -79,6 +116,7 @@ export default function AddEditCar() {
         setToast({ message:'Car updated successfully.', type:'success' });
       } else {
         await api.createCar(data);
+        clearDraft(DRAFT_KEY);
         setToast({ message:'Car added successfully.', type:'success' });
         setTimeout(() => navigate('/dealer/cars'), 1200);
       }
